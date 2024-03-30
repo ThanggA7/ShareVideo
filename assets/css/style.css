@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Roboto", sans-serif;
+  background-color: #1f2023;
+}
+/* Common */
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 2000px;
+  max-width: calc(100% - 50px);
+  margin: 0 auto;
+}
+.btn {
+  display: inline-block;
+  width: 150px;
+  padding: 10px;
+  background-color: #565bdb;
+  border-radius: 20px;
+  color: white;
+}
+/* Header */
+/* Logo */
+.header .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+}
+.logo__img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+}
+.logo--share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background-color: #e8972e;
+  border-radius: 50%;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid white;
+}
+
+.logo span {
+  color: white;
+  font-size: 2rem;
+  margin-left: 5px;
+  font-weight: 700;
+}
+
+/*  */
+.header {
+  padding-top: 10px;
+}
+.header .body {
+  display: flex;
+  align-items: center;
+}
+
+.header .profile {
+  margin-left: auto;
+  color: white;
+  cursor: pointer;
+}
+
+.navbar--menu {
+  display: flex;
+  align-items: center;
+}
+
+.navbar--menu li a {
+  padding: 4px 21px;
+  color: rgb(229 231 235);
+  font-size: 1.5rem;
+}
+/* Hero */
+.main {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.hero__info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.hero__title {
+  max-width: 700px;
+  font-size: 5.6rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: white;
+  margin: 0 auto;
+}
+
+.hero__desc {
+  max-width: 700px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding-top: 35px;
+  margin: 0 auto;
+}
+
+.hero__cta {
+  justify-content: center;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.action-brn {
+  background-color: transparent;
+  border: 1px solid #79797b;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}

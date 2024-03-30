@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="../assets/icons/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShareVideo - Cùng Xem Youtube, Kết Nối Cảm Xúc</title>
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./responsive.css" />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/profile.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/menu.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/close.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/user.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/share.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/play-track-prev.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/play-track-next.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/more-alt.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/search.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="mobile-header">
+      <input
+        hidden
+        class="menu-checkbox"
+        type="checkbox"
+        name=""
+        id="menu-checkbox"
+      />
+      <label for="menu-checkbox" class="menu-overlay"></label>
+      <div class="menu-drawer">
+        <div class="memu-drawer__list">
+          <label for="menu-checkbox" class="logo-close">
+            <i class="gg-close"></i>
+          </label>
+          <nav class="">
+            <ul class="">
+              <li>
+                <a href="#!">Upgrade</a>
+              </li>
+              <li>
+                <a href="#!">Terms</a>
+              </li>
+              <li>
+                <a href="#!">Privacy policy</a>
+              </li>
+              <li>
+                <a href="#!">Support</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <header class="header">
+      <div class="container">
+        <div class="body">
+          <label for="menu-checkbox" class="toggle-menu"
+            ><i class="gg-menu"></i>
+          </label>
+          <a href="../index.html" class="logo">
+            <img class="logo__img" src="../assets/img/logo.png" alt="" />
+            <span>ShareVideo</span>
+          </a>
+          <div class="search-box">
+            <input
+              type="text"
+              placeholder="Tìm kiếm video hoặc dán liên kết từ YouTube..."
+            />
+            <button type="submit"><i class="gg-search"></i></button>
+          </div>
+
+          <figure class="profile">
+            <i class="gg-profile"></i>
+          </figure>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="content">
+        <div class="content--video">
+          <div class="video-content">
+            <p style="color: white">
+              Select a video from the playlist to watch
+            </p>
+          </div>
+        </div>
+        <div class="content--info">
+          <div class="content-info--box">
+            <div class="box__info">
+              <h2 class="title_random">Temporary room {random}</h2>
+              <div class="host">
+                <i class="gg-user"></i>
+                <div class="host_name">
+                  <span>Host: </span>
+                  <span class="random_name"></span>
+                </div>
+              </div>
+              <div class="regime">
+                <div class="public">
+                  <i class="gg-globe-alt"></i>
+                  <span>Public</span>
+                </div>
+
+                <a href="#!" class="share">
+                  <i class="gg-share"></i>
+                  <span>Share</span>
+                </a>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="box__info">
+              <div class="button">
+                <div class="button_play">
+                  <a href="#!"><i class="gg-play-track-prev"></i></a>
+                  <a href="#!"><i class="gg-play-track-next"></i></a>
+                </div>
+                <a class="more" href="#!"> <i class="gg-more-alt"></i></a>
+              </div>
+              <div class="play-list">
+                <p class="empty">
+                  Empty playlist Search and select to add videos
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
