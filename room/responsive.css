@@ -1,11 +1,16 @@
 /* PC */
-@media screen and (min-width: 992.98px) {
+@media screen and (min-width: 1025.98px) {
   .profile .gg-search {
     display: none;
   }
 }
+
+/* IPAD PRO */
+@media screen and (max-width: 1024px) and (min-width: 1025px) {
+}
+
 /* Mobile and Tablet */
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .navbar {
     display: none;
   }
