@@ -311,3 +311,30 @@ a {
   font-size: 15px;
   color: #fff;
 }
+
+.error {
+  position: absolute;
+  margin-top: 5px;
+  width: 600px;
+  height: 50px;
+  background-color: white;
+  color: black;
+  transform: translate(-100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+  opacity: 0.8;
+  transition: 1s ease;
+}
+.error .gg-unavailable {
+  color: red;
+}
+.error_title {
+  font-size: 2rem;
+  color: red;
+}
+
+.error_desc {
+  margin-top: 3px;
+}

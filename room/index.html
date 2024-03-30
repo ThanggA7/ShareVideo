@@ -48,6 +48,15 @@
       href="https://unpkg.com/css.gg@2.0.0/icons/css/search.css"
       rel="stylesheet"
     />
+
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/play-button-o.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/unavailable.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header class="mobile-header">
@@ -109,9 +118,19 @@
     </header>
 
     <main class="main">
+      <div class="error">
+        <div style="padding: 5px">
+          <h1 class="error_title">ERROR</h1>
+          <p class="error_desc">
+            URL YouTube không hợp lệ. Vui lòng nhập liên kết video YouTube hợp
+            lệ.
+          </p>
+        </div>
+        <i class="gg-unavailable"></i>
+      </div>
       <div class="content">
         <div class="content--video">
-          <div class="video-content">
+          <div controls id="video-content" class="video-content">
             <p style="color: white">
               Select a video from the playlist to watch
             </p>
@@ -144,9 +163,18 @@
             <div class="box__info">
               <div class="button">
                 <div class="button_play">
-                  <a href="#!"><i class="gg-play-track-prev"></i></a>
-                  <a href="#!"><i class="gg-play-track-next"></i></a>
+                  <a id="play-prev" href="#!"
+                    ><i class="gg-play-track-prev"></i
+                  ></a>
+                  <a id="play-pause" href="#!"
+                    ><i class="gg-play-button-o"></i
+                  ></a>
+
+                  <a id="play-next" href="#!"
+                    ><i class="gg-play-track-next"></i
+                  ></a>
                 </div>
+
                 <a class="more" href="#!"> <i class="gg-more-alt"></i></a>
               </div>
               <div class="play-list">
@@ -160,4 +188,6 @@
       </div>
     </main>
   </body>
+  <script src="../assets/js/script.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
 </html>

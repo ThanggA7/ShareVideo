@@ -30,7 +30,7 @@
   }
   .menu-drawer {
     position: fixed;
-    inset: 0 80% 0 0;
+    inset: 0 40% 0 0;
     background-color: #242526;
     z-index: 2;
     transform: translate(-100%);
@@ -145,5 +145,13 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .error {
+    width: 75%;
+    height: 80px;
+  }
+  .error .gg-unavailable {
+    display: none;
   }
 }
