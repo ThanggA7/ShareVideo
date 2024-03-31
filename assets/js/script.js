@@ -1,27 +1,13 @@
-// Element containing video content
 const videoContent = document.getElementById("video-content");
-
-// Search box input
-const searchBoxInput = document.querySelector(".search-box input");
-
-// Play/pause button (optional)
-const playPauseButton = document.getElementById("play-pause");
-
-// Hide initial message
-videoContent.firstElementChild.style.display = "none";
-
-// Search button
-const searchButton = document.querySelector('button[type="submit"]');
-
-// YouTube player variable
+const playlistContainer = document.querySelector(".play-list");
 let youtubePlayer;
+let playlistVideos = [];
+let playlistVideosDetails = [];
+let currentVideoIndex = 0;
 
-// Load YouTube iframe player function
 function loadYoutubePlayer() {
-  // Replace 'YOUR_API_KEY' with your YouTube Data v3 API key
   const youtubeApiKey = "YOUR_API_KEY";
   const scriptURL = `https://www.youtube.com/iframe_api?enablejsapi=1&key=${youtubeApiKey}`;
-
   const tag = document.createElement("script");
   tag.src = scriptURL;
   const firstScriptTag = document.getElementsByTagName("script")[0];
@@ -40,7 +26,7 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {}
 
-const handleSearch = () => {
+function handleSearch() {
   const url = searchBoxInput.value;
 
   const youtubeRegex =
@@ -68,7 +54,104 @@ const handleSearch = () => {
       }, 1000);
     }, 1000);
   }
-};
+}
+
+function addVideoToPlaylist(videoId, playlistId) {
+  videoContent.innerHTML = ""; // Clear video content
+  if (youtubePlayer) {
+    youtubePlayer.loadVideoById(videoId);
+    // Automatically play the video
+    if (youtubePlayer.getPlayerState() !== YT.PlayerState.PLAYING) {
+      youtubePlayer.playVideo();
+    }
+  }
+
+  playlistVideos.push(videoId);
+  fetchVideoDetails(videoId);
+  updatePlaylistDisplay();
+}
+
+function removeVideoFromPlaylist(index) {
+  playlistVideos.splice(index, 1);
+  playlistVideosDetails.splice(index, 1);
+  updatePlaylistDisplay();
+  if (index === currentVideoIndex) {
+    currentVideoIndex = (currentVideoIndex + 1) % playlistVideos.length;
+    const nextVideoId = playlistVideos[currentVideoIndex];
+    youtubePlayer.loadVideoById(nextVideoId);
+  } else if (index < currentVideoIndex) {
+    currentVideoIndex--;
+  }
+}
+
+function fetchVideoDetails(videoId) {
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+  const title = `Video Title ${videoId}`;
+
+  playlistVideosDetails.push({ videoId, thumbnailUrl, title });
+}
+
+function updatePlaylistDisplay() {
+  playlistContainer.innerHTML = "";
+
+  if (playlistVideos.length === 0) {
+    const emptyPlaylistMessage = document.querySelector(".empty");
+    emptyPlaylistMessage.style.display = "block";
+    videoContent.innerHTML =
+      '<div style="color: white">Select a video from the playlist to watch</div>';
+    const listbox = document.querySelector(".item-video");
+    listbox.style.display = "none"; // Hide the item-video container
+    return;
+  }
+
+  playlistVideosDetails.forEach((video, index) => {
+    const listItem = document.createElement("div");
+    listItem.classList.add("playlist-item");
+
+    const itemVideo = document.createElement("div");
+    itemVideo.classList.add("item-video");
+
+    const thumbnailImg = document.createElement("img");
+    thumbnailImg.src = `https://img.youtube.com/vi/${video.videoId}/0.jpg`;
+    thumbnailImg.alt = "Video Thumbnail";
+    itemVideo.appendChild(thumbnailImg);
+
+    const titleElement = document.createElement("h2");
+    titleElement.classList.add("item-title");
+    titleElement.textContent = video.title;
+    itemVideo.appendChild(titleElement);
+
+    const closeIcon = document.createElement("a");
+    closeIcon.href = "#!";
+    closeIcon.innerHTML = '<i class="gg-close"></i>';
+    closeIcon.addEventListener("click", (event) => {
+      event.stopPropagation();
+      removeVideoFromPlaylist(index);
+    });
+    itemVideo.appendChild(closeIcon);
+
+    listItem.appendChild(itemVideo);
+
+    listItem.addEventListener("click", () => {
+      currentVideoIndex = index;
+      youtubePlayer.loadVideoById(video.videoId);
+    });
+
+    playlistContainer.appendChild(listItem);
+  });
+
+  const emptyPlaylistMessage = document.querySelector(".empty");
+  emptyPlaylistMessage.style.display = "none";
+
+  const listbox = document.querySelector(".item-video");
+  listbox.style.display = "block"; // Show the item-video container
+}
+
+const searchBoxInput = document.querySelector(".search-box input");
+const searchButton = document.querySelector('button[type="submit"]');
+const playPauseButton = document.getElementById("play-pause");
+const prevButton = document.getElementById("play-prev");
+const nextButton = document.getElementById("play-next");
 
 searchBoxInput.addEventListener("keydown", function (event) {
   if (event.keyCode === 13) {
@@ -78,26 +161,53 @@ searchBoxInput.addEventListener("keydown", function (event) {
 
 searchButton.addEventListener("click", handleSearch);
 
-// Function to add video to playlist using YouTube API (needs implementation)
-function addVideoToPlaylist(videoId, playlistId) {
-  // Implement logic to add video to playlist using YouTube Data API v3
-  // Refer to: https://developers.google.com/youtube/v3/docs/playlistItems/insert
+loadYoutubePlayer();
 
-  // After successful addition, hide message and play video (optional)
-  videoContent.firstElementChild.style.display = "none";
+playPauseButton.addEventListener("click", () => {
   if (youtubePlayer) {
-    youtubePlayer.loadVideoById(videoId);
-    if (playPauseButton) {
-      playPauseButton.click(); // Simulate play button click
+    if (youtubePlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+      youtubePlayer.pauseVideo();
+    } else {
+      youtubePlayer.playVideo();
+    }
+  }
+});
+
+prevButton.addEventListener("click", () => {
+  if (playlistVideos.length === 0) return;
+
+  currentVideoIndex =
+    (currentVideoIndex - 1 + playlistVideos.length) % playlistVideos.length;
+  const prevVideoId = playlistVideos[currentVideoIndex];
+  youtubePlayer.loadVideoById(prevVideoId);
+});
+
+nextButton.addEventListener("click", () => {
+  if (playlistVideos.length === 0) return;
+
+  currentVideoIndex = (currentVideoIndex + 1) % playlistVideos.length;
+  const nextVideoId = playlistVideos[currentVideoIndex];
+  youtubePlayer.loadVideoById(nextVideoId);
+});
+function removeVideoFromPlaylist(index) {
+  playlistVideos.splice(index, 1);
+  playlistVideosDetails.splice(index, 1);
+  updatePlaylistDisplay();
+
+  if (playlistVideos.length === 0) {
+    const emptyPlaylistMessage = document.querySelector(".empty");
+    emptyPlaylistMessage.style.display = "block"; // Hiển thị thông báo playlist trống
+    videoContent.innerHTML = ""; // Xóa nội dung video
+    if (youtubePlayer) {
+      youtubePlayer.stopVideo(); // Dừng phát video
+    }
+  } else {
+    if (index === currentVideoIndex) {
+      currentVideoIndex = (currentVideoIndex + 1) % playlistVideos.length;
+      const nextVideoId = playlistVideos[currentVideoIndex];
+      youtubePlayer.loadVideoById(nextVideoId);
+    } else if (index < currentVideoIndex) {
+      currentVideoIndex--;
     }
   }
 }
-
-// Hide comments section (assuming comments have a class 'comments')
-const commentsSection = document.querySelector(".comments");
-if (commentsSection) {
-  commentsSection.style.display = "none";
-}
-
-// Call loadYoutubePlayer initially (assuming you want to load API on page load)
-loadYoutubePlayer();
