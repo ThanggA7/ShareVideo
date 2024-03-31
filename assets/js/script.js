@@ -211,3 +211,37 @@ function removeVideoFromPlaylist(index) {
     }
   }
 }
+// Hàm để tạo số ngẫu nhiên từ 1000 đến 9999
+function generateRandomRoomNumber() {
+  return Math.floor(Math.random() * 9000) + 1000;
+}
+
+// Hàm để tạo tên chủ phòng ngẫu nhiên
+function generateRandomHostName() {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let randomName = "";
+  for (let i = 0; i < 5; i++) {
+    randomName += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+  }
+  return randomName;
+}
+
+// Gán số phòng và tên chủ phòng vào các phần tử HTML
+const roomNumberElement = document.querySelector(".title_random");
+const hostNameElement = document.querySelector(".random_name");
+
+// Tạo số phòng và tên chủ phòng ngẫu nhiên
+const randomRoomNumber = generateRandomRoomNumber();
+const randomHostName = generateRandomHostName();
+
+// Hiển thị số phòng và tên chủ phòng trong các phần tử HTML
+roomNumberElement.textContent = `Temporary room ${randomRoomNumber}`;
+hostNameElement.textContent = randomHostName;
+// Lắng nghe sự kiện click trên nút "Share"
+const shareButton = document.getElementById("shareButton");
+shareButton.addEventListener("click", function () {
+  // Hiển thị thông báo cho người dùng
+  alert(
+    "Bạn có thể copy link và chia sẻ nó qua Facebook, Gmail, và các mạng xã hội khác."
+  );
+});

@@ -69,16 +69,16 @@
           <nav class="navbar">
             <ul class="navbar--menu">
               <li>
-                <a href="#!">Upgrade</a>
+                <a onclick="showAlert()" href="#!">Upgrade</a>
               </li>
               <li>
-                <a href="#!">Terms</a>
+                <a onclick="showAlert()" href="#!">Terms</a>
               </li>
               <li>
-                <a href="#!">Privacy policy</a>
+                <a onclick="showAlert()" href="#!">Privacy policy</a>
               </li>
               <li>
-                <a href="#!">Support</a>
+                <a onclick="showAlert()" href="#!">Support</a>
               </li>
             </ul>
           </nav>
@@ -103,11 +103,16 @@
 
           <div class="hero__cta">
             <a target="_self" href="./room/index.html" class="btn">Try now</a>
-            <a href="#!" class="btn action-brn">Login</a>
+            <a href="#!" class="btn action-brn" onclick="showAlert()">Login</a>
           </div>
         </section>
       </div>
     </main>
   </body>
   <script src="./assets/js/index.js"></script>
+  <script>
+    function showAlert() {
+      alert("Đang lười làm, nào rảnh rồi làm hoặc thích làm thì làm :)");
+    }
+  </script>
 </html>
